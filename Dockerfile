@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.14-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -9,7 +9,7 @@ COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt \
     && pip install --no-cache-dir --upgrade "msgpack>=1.2.2" "setuptools>=84.0.0"
-    
+
 COPY app ./app
 
 RUN useradd --create-home --shell /usr/sbin/nologin appuser \
