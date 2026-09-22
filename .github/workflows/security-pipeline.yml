@@ -37,11 +37,11 @@ jobs:
 
       - name: Run pytest
         run: |
-          pytest
+          pytest -q
 
       - name: Run pylint
         run: |
-          pylint app
+          pylint app tests
 
       - name: Run flake8
         run: |
@@ -49,7 +49,7 @@ jobs:
 
       - name: Run mypy
         run: |
-          mypy app
+          mypy app tests
 
 
   sast:
