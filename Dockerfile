@@ -7,8 +7,9 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
-
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir --upgrade "msgpack>=1.2.2" "setuptools>=84.0.0"
+    
 COPY app ./app
 
 RUN useradd --create-home --shell /usr/sbin/nologin appuser \
