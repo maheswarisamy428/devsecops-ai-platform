@@ -18,8 +18,6 @@ h11==0.16.0
     # via uvicorn
 idna==3.20
     # via anyio
-msgpack==1.2.2
-    # via -r requirements.in
 prometheus-client==0.26.0
     # via
     #   -r requirements.in
@@ -49,6 +47,3 @@ typing-inspection==0.4.4
     #   pydantic
 uvicorn==0.53.0
     # via -r requirements.in
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
