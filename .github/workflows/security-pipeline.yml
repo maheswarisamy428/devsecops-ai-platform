@@ -34,6 +34,7 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install -r dev_requirements.txt
+          pip install -r test_requirements.txt
 
       - name: Run pytest
         run: |
