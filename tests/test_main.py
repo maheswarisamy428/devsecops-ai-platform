@@ -1,3 +1,5 @@
+"""Tests for the main.py file."""
+
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -7,6 +9,7 @@ client = TestClient(app)
 
 
 def test_health():
+    """Test the health endpoint."""
     response = client.get("/health")
 
     assert response.status_code == 200
@@ -14,6 +17,7 @@ def test_health():
 
 
 def test_metadata():
+    """Test the metadata endpoint."""
     response = client.get("/metadata")
 
     assert response.status_code == 200
@@ -24,6 +28,7 @@ def test_metadata():
 
 
 def test_metrics():
+    """Test the metrics endpoint."""
     response = client.get("/metrics")
 
     assert response.status_code == 200
