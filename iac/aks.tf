@@ -6,7 +6,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix = "${var.project_name}-${var.environment}"
 
   sku_tier = "Free"
-
+  node_provisioning_profile {
+    mode = "Auto"
+  }
   default_node_pool {
     name       = "system"
     vm_size    = "Standard_D2s_v5"
