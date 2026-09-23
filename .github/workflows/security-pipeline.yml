@@ -270,8 +270,21 @@ jobs:
 
       - name: Evaluate missing resource limits scenario
         run: |
+          set +e
+
           kyverno apply k8s/kyverno-policies.yaml \
             --resource k8s/evals/no-resource-limits.yaml
+
+          EXIT_CODE=$?
+
+          if [ "$EXIT_CODE" -eq 0 ]; then
+            echo "::error::Security test failed - workload without resource limits was allowed."
+            exit 1
+          fi
+
+          echo "Expected security violation detected."
+          echo "Missing resource limits were correctly blocked by Kyverno."
+          exit 0
 
       - name: Evaluate unauthorized network scenario
         run: |
