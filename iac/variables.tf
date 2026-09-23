@@ -34,3 +34,8 @@ variable "tags" {
     purpose    = "simulated-ai-microservice"
   }
 }
+
+variable "aks_api_server_authorized_ip_ranges" {
+  type        = list(string)
+  description = "CIDR ranges allowed to access the AKS API server"
+}

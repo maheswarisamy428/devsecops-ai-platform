@@ -5,10 +5,28 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   dns_prefix = "${var.project_name}-${var.environment}"
 
-  sku_tier = "Free"
+  # CKV_AZURE_170
+  sku_tier = "Standard"
+
   node_provisioning_profile {
     mode = "Auto"
   }
+
+  # CKV_AZURE_115
+  private_cluster_enabled = true
+
+  # CKV_AZURE_6
+  api_server_authorized_ip_ranges = var.aks_api_server_authorized_ip_ranges
+
+  # CKV_AZURE_117
+  disk_encryption_set_id = azurerm_disk_encryption_set.aks.id
+
+  # CKV_AZURE_171
+  automatic_channel_upgrade = "stable"
+
+  # CKV_AZURE_141
+  local_account_disabled = true
+
   default_node_pool {
     name       = "system"
     vm_size    = "Standard_D2s_v5"
@@ -18,6 +36,15 @@ resource "azurerm_kubernetes_cluster" "main" {
 
     only_critical_addons_enabled = true
 
+    # CKV_AZURE_168
+    max_pods = 50
+
+    # CKV_AZURE_226
+    os_disk_type = "Ephemeral"
+
+    # CKV_AZURE_227
+    host_encryption_enabled = true
+
     upgrade_settings {
       max_surge = "10%"
     }
@@ -25,6 +52,12 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   identity {
     type = "SystemAssigned"
+  }
+
+  # CKV_AZURE_172
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
+    secret_rotation_interval = "2m"
   }
 
   network_profile {
@@ -60,8 +93,31 @@ resource "azurerm_kubernetes_cluster_node_pool" "workload" {
 
   vnet_subnet_id = azurerm_subnet.aks.id
 
+  # CKV_AZURE_168
+  max_pods = 50
+
+  # CKV_AZURE_227
+  host_encryption_enabled = true
+
+  # CKV_AZURE_226
+  os_disk_type = "Ephemeral"
+
   node_labels = {
     workload = "application"
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_disk_encryption_set" "aks" {
+  name                = "${var.project_name}-${var.environment}-des"
+  resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
+
+  key_vault_key_id = azurerm_key_vault_key.aks.id
+
+  identity {
+    type = "SystemAssigned"
   }
 
   tags = var.tags

@@ -25,3 +25,30 @@ resource "azurerm_subnet" "private_endpoints" {
 
   private_endpoint_network_policies = "Disabled"
 }
+
+
+resource "azurerm_network_security_group" "aks" {
+  name                = "${var.project_name}-${var.environment}-aks-nsg"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+
+  tags = var.tags
+}
+
+resource "azurerm_network_security_group" "private_endpoints" {
+  name                = "${var.project_name}-${var.environment}-pe-nsg"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+
+  tags = var.tags
+}
+
+resource "azurerm_subnet_network_security_group_association" "aks" {
+  subnet_id                 = azurerm_subnet.aks.id
+  network_security_group_id = azurerm_network_security_group.aks.id
+}
+
+resource "azurerm_subnet_network_security_group_association" "private_endpoints" {
+  subnet_id                 = azurerm_subnet.private_endpoints.id
+  network_security_group_id = azurerm_network_security_group.private_endpoints.id
+}
