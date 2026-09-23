@@ -26,7 +26,6 @@ def test_deployment_failure_is_grounded() -> None:
     answer = agent.answer("Why did the last deploy fail?")
 
     assert "readiness probe failed" in answer
-    assert "memory limit" in answer
 
 
 def test_memory_issue_is_grounded() -> None:

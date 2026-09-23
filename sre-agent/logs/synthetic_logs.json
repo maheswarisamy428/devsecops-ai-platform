@@ -12,12 +12,6 @@
     "message": "Container image devsecops-ai-service:8f31a2c pushed successfully"
   },
   {
-    "timestamp": "2026-09-23T08:57:03Z",
-    "service": "deployment",
-    "level": "INFO",
-    "message": "Deployment started for devsecops-ai-service:8f31a2c"
-  },
-  {
     "timestamp": "2026-09-23T08:57:19Z",
     "service": "deployment",
     "level": "ERROR",
