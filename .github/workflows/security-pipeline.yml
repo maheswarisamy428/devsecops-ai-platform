@@ -137,10 +137,7 @@ jobs:
   build:
     name: Build Container
     needs:
-      - sast
-      - dependency_scan
-      - secret_scan
-      - dockerfile_policy
+      - terraform_security
 
     runs-on: ubuntu-latest
 
@@ -183,6 +180,9 @@ jobs:
     name: Terraform IaC Security
     runs-on: ubuntu-latest
     needs:
+      - sast
+      - dependency_scan
+      - secret_scan
       - dockerfile_policy
     steps:
       - name: Checkout repository
