@@ -1,3 +1,4 @@
+#checkov:skip=CKV_AZURE_59: AzureRM v5 uses allow_nested_items_to_be_public for this setting.
 resource "azurerm_storage_account" "ai_data" {
   name = replace(
     "${var.project_name}${var.environment}aistorage",
