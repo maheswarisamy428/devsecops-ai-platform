@@ -1,0 +1,87 @@
+groups:
+  - name: ai-platform-local-alerts
+    interval: 15s
+
+    rules:
+
+      - alert: PipelineSuccessRateLow
+        expr: ci_pipeline_success_rate_percent < 90
+        for: 30s
+        labels:
+          severity: warning
+          component: cicd
+        annotations:
+          summary: "CI pipeline success rate is below 90%"
+          description: >
+            Simulated CI pipeline success rate has remained
+            below 90%.
+
+      - alert: PodRestartSpike
+        expr: pod_restart_count_15m >= 3
+        for: 30s
+        labels:
+          severity: warning
+          component: kubernetes
+        annotations:
+          summary: "Pod restart spike detected"
+          description: >
+            Simulated pod restart count is at least 3
+            within 15 minutes.
+
+      - alert: PodRestartLoop
+        expr: pod_restart_count_15m >= 5
+        for: 30s
+        labels:
+          severity: critical
+          component: kubernetes
+        annotations:
+          summary: "Possible pod restart loop"
+          description: >
+            Simulated pod restart count is at least 5
+            within 15 minutes.
+
+      - alert: SecurityPolicyDenialSpike
+        expr: security_policy_denials_per_second > 0.5
+        for: 30s
+        labels:
+          severity: warning
+          component: security
+        annotations:
+          summary: "Security policy denial rate increased"
+          description: >
+            Simulated security policy denials exceeded
+            the expected baseline.
+
+      - alert: CriticalSecurityPolicyDenialSpike
+        expr: security_policy_denials_per_second > 2
+        for: 30s
+        labels:
+          severity: critical
+          component: security
+        annotations:
+          summary: "Critical security policy denial spike"
+          description: >
+            Simulated security policy denials exceeded
+            2 events per second.
+
+      - alert: HighHTTP5xxRate
+        expr: http_5xx_rate_percent > 5
+        for: 30s
+        labels:
+          severity: warning
+          component: application
+        annotations:
+          summary: "HTTP 5xx rate is above 5%"
+          description: >
+            Simulated HTTP 5xx error rate is above 5%.
+
+      - alert: PodAvailabilityLow
+        expr: pod_availability_ready < 2
+        for: 30s
+        labels:
+          severity: critical
+          component: availability
+        annotations:
+          summary: "Pod availability is low"
+          description: >
+            Fewer than two simulated AI platform pods are ready.
