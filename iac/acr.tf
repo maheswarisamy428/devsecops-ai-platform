@@ -21,9 +21,8 @@ resource "azurerm_container_registry" "main" {
   zone_redundancy_enabled   = true
 
   georeplications {
-    location                        = var.secondary_location
-    zone_redundancy_enabled         = true
-    global_endpoint_routing_enabled = true
+    location                = var.secondary_location
+    zone_redundancy_enabled = true
   }
 
   tags = var.tags

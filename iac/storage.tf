@@ -1,4 +1,3 @@
-#checkov:skip=CKV_AZURE_59: AzureRM v5 uses allow_nested_items_to_be_public for this setting.
 resource "azurerm_storage_account" "ai_data" {
   name = replace(
     "${var.project_name}${var.environment}aistorage",
@@ -14,7 +13,7 @@ resource "azurerm_storage_account" "ai_data" {
 
   min_tls_version = "TLS1_2"
 
-  public_network_access = "Disabled"
+  public_network_access_enabled = false
 
   shared_access_key_enabled = false
 
