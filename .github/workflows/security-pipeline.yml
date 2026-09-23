@@ -251,7 +251,7 @@ jobs:
       - name: Install Kyverno CLI
         uses: kyverno/action-install-cli@v0.2.0
         with:
-          verify: true
+          version: v1.10.3
 
       - name: Check Kyverno installation
         run: |
