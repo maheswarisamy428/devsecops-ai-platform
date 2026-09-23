@@ -37,7 +37,7 @@ jobs:
 
       - name: Run pytest
         env:
-          PYTHONPATH: sre-agent
+          PYTHONPATH: ${{ github.workspace }}/sre-agent
         run: |
           pytest -q
 
