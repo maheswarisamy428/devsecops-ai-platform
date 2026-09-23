@@ -182,7 +182,8 @@ jobs:
   terraform_security:
     name: Terraform IaC Security
     runs-on: ubuntu-latest
-
+    needs:
+      - dockerfile_policy
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
