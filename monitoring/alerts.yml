@@ -60,3 +60,4 @@ groups:
           summary: "Critical spike in security policy denials"
           description: "A sustained spike in Kyverno policy denials was detected."
           
+          
