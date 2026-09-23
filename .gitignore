@@ -32,3 +32,5 @@ crash.*.log
 .vscode/
 
 .DS_Store
+
+sre-agent/chroma_db/

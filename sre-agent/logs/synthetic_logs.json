@@ -1,0 +1,56 @@
+[
+  {
+    "timestamp": "2026-09-23T08:55:01Z",
+    "service": "ci-pipeline",
+    "level": "INFO",
+    "message": "Build completed successfully for commit 8f31a2c"
+  },
+  {
+    "timestamp": "2026-09-23T08:56:14Z",
+    "service": "ci-pipeline",
+    "level": "INFO",
+    "message": "Container image devsecops-ai-service:8f31a2c pushed successfully"
+  },
+  {
+    "timestamp": "2026-09-23T08:57:03Z",
+    "service": "deployment",
+    "level": "INFO",
+    "message": "Deployment started for devsecops-ai-service:8f31a2c"
+  },
+  {
+    "timestamp": "2026-09-23T08:57:19Z",
+    "service": "deployment",
+    "level": "ERROR",
+    "message": "Deployment failed: readiness probe failed for pod embedding-service-7d8c9f6d7b-x2k4m"
+  },
+  {
+    "timestamp": "2026-09-23T08:57:20Z",
+    "service": "kubernetes",
+    "level": "WARNING",
+    "message": "Pod embedding-service-7d8c9f6d7b-x2k4m restarted because container exceeded memory limit"
+  },
+  {
+    "timestamp": "2026-09-23T08:58:02Z",
+    "service": "deployment",
+    "level": "INFO",
+    "message": "Deployment rolled back to devsecops-ai-service:7e21b8a"
+  },
+  {
+    "timestamp": "2026-09-23T09:01:12Z",
+    "service": "application",
+    "level": "INFO",
+    "message": "Embedding service healthy after rollback"
+  },
+  {
+    "timestamp": "2026-09-23T09:02:30Z",
+    "service": "monitoring",
+    "level": "WARNING",
+    "message": "Embedding request latency increased to 2.4 seconds"
+  },
+  {
+    "timestamp": "2026-09-23T09:03:10Z",
+    "service": "security",
+    "level": "INFO",
+    "message": "Kyverno admission policy denied a pod running as root"
+  }
+]
