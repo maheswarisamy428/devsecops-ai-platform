@@ -14,10 +14,19 @@ htmlcov/
 
 *.log
 
-terraform.tfvars
+# Terraform
+**/.terraform/
 *.tfstate
 *.tfstate.*
-.terraform/
+crash.log
+crash.*.log
+*.tfplan
+*.plan
+
+# Terraform variables / backend configuration
+**/terraform.tfvars
+**/terraform.tfvars.json
+**/backend-*.tfvars
 
 .idea/
 .vscode/

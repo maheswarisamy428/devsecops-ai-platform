@@ -1,0 +1,12 @@
+project_name = "devsecops-ai"
+
+environment = "dev"
+
+location = "westeurope"
+
+tags = {
+  project    = "devsecops-challenge"
+  managed_by = "terraform"
+  purpose    = "simulated-ai-microservice"
+  owner      = "devsecops"
+}
