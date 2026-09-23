@@ -15,14 +15,8 @@ resource "azurerm_kubernetes_cluster" "main" {
   # CKV_AZURE_115
   private_cluster_enabled = true
 
-  # CKV_AZURE_6
-  api_server_authorized_ip_ranges = var.aks_api_server_authorized_ip_ranges
-
   # CKV_AZURE_117
   disk_encryption_set_id = azurerm_disk_encryption_set.aks.id
-
-  # CKV_AZURE_171
-  automatic_channel_upgrade = "stable"
 
   # CKV_AZURE_141
   local_account_disabled = true

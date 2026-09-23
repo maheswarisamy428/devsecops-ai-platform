@@ -16,13 +16,12 @@ resource "azurerm_container_registry" "main" {
 
   retention_policy_in_days  = 30
   quarantine_policy_enabled = true
-  trust_policy_enabled      = true
   zone_redundancy_enabled   = true
 
   georeplications {
-    location                  = var.secondary_location
-    regional_endpoint_enabled = true
-    zone_redundancy_enabled   = true
+    location                        = var.secondary_location
+    zone_redundancy_enabled         = true
+    global_endpoint_routing_enabled = true
   }
 
   tags = var.tags
