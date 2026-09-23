@@ -44,29 +44,6 @@ resource "azurerm_private_endpoint" "key_vault" {
   tags = var.tags
 }
 
-resource "azurerm_private_dns_zone" "key_vault" {
-  name                = "privatelink.vaultcore.azure.net"
-  resource_group_name = azurerm_resource_group.main.name
-
-  tags = var.tags
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "key_vault" {
-  name                  = "${var.project_name}-${var.environment}-kv-dns-link"
-  resource_group_name   = azurerm_resource_group.main.name
-  private_dns_zone_name = azurerm_private_dns_zone.key_vault.name
-  virtual_network_id    = azurerm_virtual_network.main.id
-}
-
-resource "azurerm_private_dns_zone_group" "key_vault" {
-  name                = "key-vault-dns-zone-group"
-  private_endpoint_id = azurerm_private_endpoint.key_vault.id
-
-  private_dns_zone_configs {
-    name                = "key-vault-dns"
-    private_dns_zone_id = azurerm_private_dns_zone.key_vault.id
-  }
-}
 
 resource "azurerm_key_vault_key" "aks" {
   name         = "aks-encryption-key"
