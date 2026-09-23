@@ -12,7 +12,7 @@ resource "azurerm_log_analytics_workspace" "main" {
 
 resource "azurerm_monitor_diagnostic_setting" "storage_blob" {
   name               = "${var.project_name}-${var.environment}-storage-blob-logs"
-  target_resource_id = "${azurerm_storage_account.ai_data.id}/blobServices/default"
+  target_resource_id = azurerm_storage_account.ai_data.id
 
   log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
 
@@ -26,12 +26,16 @@ resource "azurerm_monitor_diagnostic_setting" "storage_blob" {
 
   enabled_log {
     category = "StorageDelete"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
   }
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage_queue" {
   name               = "${var.project_name}-${var.environment}-storage-queue-logs"
-  target_resource_id = "${azurerm_storage_account.ai_data.id}/queueServices/default"
+  target_resource_id = azurerm_storage_account.ai_data.id
 
   log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
 
@@ -45,5 +49,9 @@ resource "azurerm_monitor_diagnostic_setting" "storage_queue" {
 
   enabled_log {
     category = "StorageDelete"
+  }
+
+  enabled_metric {
+    category = "AllMetrics"
   }
 }

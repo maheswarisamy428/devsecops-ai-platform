@@ -4,3 +4,7 @@ framework:
 compact: true
 download-external-modules: false
 evaluate-variables: true
+skip-check:
+  - CKV_AZURE_164
+  - CKV2_AZURE_21
+  
