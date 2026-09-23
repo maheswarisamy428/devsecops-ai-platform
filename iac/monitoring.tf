@@ -55,3 +55,15 @@ resource "azurerm_monitor_diagnostic_setting" "storage_queue" {
     category = "AllMetrics"
   }
 }
+
+resource "azurerm_storage_account_queue_properties" "ai_data" {
+  storage_account_id = azurerm_storage_account.ai_data.id
+
+  logging {
+    version               = "1.0"
+    delete                = true
+    read                  = true
+    write                 = true
+    retention_policy_days = 7
+  }
+}
