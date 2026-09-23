@@ -29,3 +29,20 @@ AI workloads can consume significantly more CPU, memory and potentially GPU reso
 Expected network decision: **DENY**
 
 The embedding service accepts traffic only from workloads in the approved `ai-platform` namespace. Namespace isolation reduces the blast radius if another AI or application workload is compromised.
+
+
+
+## Workstream D — Agentic SRE Log Intelligence
+
+### D1 — Deployment failure
+
+Question:
+
+> Why did the last deploy fail?
+
+Expected evidence:
+
+```text
+Deployment failed: readiness probe failed for pod embedding-service-7d8c9f6d7b-x2k4m
+
+
