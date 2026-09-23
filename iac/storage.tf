@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "ai_data" {
 
   min_tls_version = "TLS1_2"
 
-  public_network_access = false
+  public_network_access = "Disabled"
 
   shared_access_key_enabled = false
 
