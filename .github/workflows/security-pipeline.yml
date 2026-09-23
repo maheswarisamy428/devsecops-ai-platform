@@ -230,7 +230,7 @@ jobs:
   kubernetes_security:
     name: Kubernetes Security
     needs:
-      - python_quality
+      - terraform_security
 
     runs-on: ubuntu-latest
 
