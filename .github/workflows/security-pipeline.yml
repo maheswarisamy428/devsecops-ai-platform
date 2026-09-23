@@ -245,19 +245,18 @@ jobs:
         with:
           files: k8s
 
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.1
+
       - name: Install Kyverno CLI
+        uses: kyverno/action-install-cli@v0.2.0
+        with:
+          verify: true
+
+      - name: Check Kyverno installation
         run: |
-          KYVERNO_VERSION="v1.15.2"
-
-          curl -fL \
-            -o kyverno-cli.tar.gz \
-            "https://github.com/kyverno/kyverno/releases/download/${KYVERNO_VERSION}/kyverno-cli_linux_x86_64.tar.gz"
-
-          tar -xzf kyverno-cli.tar.gz
-
-          sudo mv kyverno /usr/local/bin/kyverno
-
           kyverno version
+          cosign version
 
       - name: Validate Kyverno policies
         run: |
