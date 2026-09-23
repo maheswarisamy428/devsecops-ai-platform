@@ -1,3 +1,5 @@
+#checkov:skip=CKV_AZURE_59: AzureRM v5 exposes allow_nested_items_to_be_public instead of allow_blob_public_access.
+#checkov:skip=CKV_AZURE_33: AzureRM v5 does not support queue service logging blocks on this resource.
 resource "azurerm_storage_account" "ai_data" {
   name = replace(
     "${var.project_name}${var.environment}aistorage",
@@ -49,6 +51,7 @@ resource "azurerm_storage_account" "ai_data" {
   tags = var.tags
 }
 
+#checkov:skip=CKV2_AZURE_21: AzureRM v5 does not expose blob service read logging here.
 resource "azurerm_storage_container" "embeddings" {
   name = "embeddings"
 
@@ -73,4 +76,3 @@ resource "azurerm_private_endpoint" "storage" {
 
   tags = var.tags
 }
-

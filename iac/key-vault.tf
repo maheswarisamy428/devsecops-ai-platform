@@ -8,7 +8,7 @@ resource "azurerm_key_vault" "main" {
 
   tenant_id = data.azurerm_client_config.current.tenant_id
 
-  sku_name = "standard"
+  sku_name = "premium"
 
   rbac_authorization_enabled = true
 
@@ -49,8 +49,9 @@ resource "azurerm_key_vault_key" "aks" {
   name         = "aks-encryption-key"
   key_vault_id = azurerm_key_vault.main.id
 
-  key_type = "RSA"
-  key_size = 4096
+  key_type        = "RSA-HSM"
+  key_size        = 4096
+  expiration_date = "2030-12-31T23:59:59Z"
 
   key_opts = [
     "decrypt",
@@ -68,8 +69,9 @@ resource "azurerm_key_vault_key" "storage" {
   name         = "storage-encryption-key"
   key_vault_id = azurerm_key_vault.main.id
 
-  key_type = "RSA"
-  key_size = 4096
+  key_type        = "RSA-HSM"
+  key_size        = 4096
+  expiration_date = "2030-12-31T23:59:59Z"
 
   key_opts = [
     "decrypt",

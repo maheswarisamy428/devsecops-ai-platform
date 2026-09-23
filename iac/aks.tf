@@ -6,7 +6,8 @@ resource "azurerm_kubernetes_cluster" "main" {
   dns_prefix = "${var.project_name}-${var.environment}"
 
   # CKV_AZURE_170
-  sku_tier = "Standard"
+  sku_tier                  = "Standard"
+  automatic_upgrade_channel = "stable"
 
   node_provisioning_profile {
     mode = "Auto"
