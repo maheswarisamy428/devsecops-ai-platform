@@ -85,4 +85,3 @@ groups:
           summary: "Pod availability is low"
           description: >
             Fewer than two simulated AI platform pods are ready.
-            
