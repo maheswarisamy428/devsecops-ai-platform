@@ -47,3 +47,4 @@ def test_unknown_question_does_not_hallucinate() -> None:
     )
 
     assert "I don't know" in answer
+    
