@@ -224,5 +224,94 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: iac
-          
-    
+
+  kubernetes_security:
+    name: Kubernetes Security
+    needs:
+      - python_quality
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Validate Kubernetes manifests
+        uses: instrumenta/kubeval-action@master
+        with:
+          files: k8s
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.1.1
+
+      - name: Install Kyverno CLI
+        uses: kyverno/action-install-cli@v0.2.0
+        with:
+          version: v1.10.3
+
+      - name: Check Kyverno installation
+        run: |
+          kyverno version
+          cosign version
+
+      - name: Validate Kyverno policies
+        run: |
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/embedding-deployment.yaml
+
+      - name: Evaluate root pod scenario
+        run: |
+          set +e
+
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/evals/root-pod.yaml
+
+          EXIT_CODE=$?
+
+          if [ "$EXIT_CODE" -eq 0 ]; then
+            echo "::error::Security test failed - root pod was allowed."
+            exit 1
+          fi
+
+          echo "Expected security violation detected."
+          echo "Root pod was correctly blocked by Kyverno."
+          exit 0
+
+      - name: Evaluate missing resource limits scenario
+        run: |
+          set +e
+
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/evals/no-resource-limits.yaml
+
+          EXIT_CODE=$?
+
+          if [ "$EXIT_CODE" -eq 0 ]; then
+            echo "::error::Security test failed - workload without resource limits was allowed."
+            exit 1
+          fi
+
+          echo "Expected security violation detected."
+          echo "Missing resource limits were correctly blocked by Kyverno."
+          exit 0
+
+      - name: Evaluate unauthorized network scenario
+        run: |
+          set +e
+
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/evals/unauthorized-network-access.yaml
+
+          EXIT_CODE=$?
+
+          if [ "$EXIT_CODE" -eq 0 ]; then
+            echo "::error::Security test failed - unauthorized network configuration was allowed."
+            exit 1
+          fi
+
+          echo "Expected security violation detected."
+          echo "Unauthorized network configuration was correctly blocked by Kyverno."
+          exit 0

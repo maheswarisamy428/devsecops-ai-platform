@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unlimited-ai-pod
+  namespace: ai-platform
+
+spec:
+  securityContext:
+    runAsNonRoot: true
+
+  containers:
+    - name: ai-worker
+      image: nginx:1.27
+
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+            
