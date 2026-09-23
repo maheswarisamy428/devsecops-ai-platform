@@ -1,0 +1,3 @@
+# INTENTIONALLY INSECURE EVALUATION FIXTURE — DO NOT BUILD.
+FROM python:latest
+CMD ["python", "-c", "print('eval')"]
