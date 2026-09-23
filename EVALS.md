@@ -46,3 +46,30 @@ Expected evidence:
 Deployment failed: readiness probe failed for pod embedding-service-7d8c9f6d7b-x2k4m
 
 
+
+
+## E. Monitoring & Observability
+
+### Monitoring architecture
+
+The monitoring design uses:
+
+- Prometheus for metrics collection and alert evaluation.
+- Grafana for visualization.
+- Kubernetes metrics for pod health and restart counts.
+- Application `/metrics` endpoint for service-level metrics.
+- Kyverno metrics for security-policy denials.
+
+The dashboard definition is provided as a Grafana JSON export.
+A live Prometheus/Grafana deployment is not required for this simulated challenge.
+
+### E1 - Normal week
+
+Scenario:
+
+```text
+Pipeline success rate: 97-100%
+Pod restarts: 0-1 per pod/day
+Policy denials: 0-2/hour
+HTTP 5xx: <0.5%
+Pods ready: 2/2
