@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: untrusted-workload
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unauthorized-client
+  namespace: untrusted-workload
+
+spec:
+  containers:
+    - name: client
+      image: curlimages/curl:8.10.1
+
+      command:
+        - sleep
+        - "3600"
+
+      securityContext:
+        runAsNonRoot: true
+
+      resources:
+        requests:
+          cpu: "50m"
+          memory: "64Mi"
+        limits:
+          cpu: "100m"
+          memory: "128Mi"
+          

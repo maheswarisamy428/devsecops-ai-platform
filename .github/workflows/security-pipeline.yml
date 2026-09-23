@@ -224,5 +224,52 @@ jobs:
         uses: aquasecurity/tfsec-action@v1.0.3
         with:
           working_directory: iac
+
+  kubernetes_security:
+    name: Kubernetes Security
+    needs:
+      - python_quality
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Validate Kubernetes manifests
+        uses: instrumenta/kubeval-action@master
+        with:
+          files: k8s
+
+      - name: Install Kyverno CLI
+        run: |
+          curl -LO https://github.com/kyverno/kyverno/releases/latest/download/kyverno-cli_linux_x86_64.tar.gz
+          tar -xzf kyverno-cli_linux_x86_64.tar.gz
+          sudo mv kyverno /usr/local/bin/kyverno
+          kyverno version
+
+      - name: Validate Kyverno policies
+        run: |
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/embedding-deployment.yaml
+
+      - name: Evaluate root pod scenario
+        run: |
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/evals/root-pod.yaml
+
+      - name: Evaluate missing resource limits scenario
+        run: |
+          kyverno apply k8s/kyverno-policies.yaml \
+            --resource k8s/evals/no-resource-limits.yaml
+
+      - name: Evaluate unauthorized network scenario
+        run: |
+          kubectl apply \
+            --dry-run=client \
+            -f k8s/evals/unauthorized-network-access.yaml
           
     
