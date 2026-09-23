@@ -59,8 +59,8 @@ resource "azurerm_private_dns_zone_virtual_network_link" "key_vault" {
 }
 
 resource "azurerm_private_dns_zone_group" "key_vault" {
-  name                 = "key-vault-dns-zone-group"
-  private_endpoint_id  = azurerm_private_endpoint.key_vault.id
+  name                = "key-vault-dns-zone-group"
+  private_endpoint_id = azurerm_private_endpoint.key_vault.id
 
   private_dns_zone_configs {
     name                = "key-vault-dns"

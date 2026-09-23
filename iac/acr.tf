@@ -14,7 +14,7 @@ resource "azurerm_container_registry" "main" {
 
   public_network_access_enabled = false
 
-  retention_policy_in_days = 30
+  retention_policy_in_days  = 30
   quarantine_policy_enabled = true
   trust_policy_enabled      = true
   zone_redundancy_enabled   = true

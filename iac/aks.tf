@@ -56,7 +56,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   # CKV_AZURE_172
   key_vault_secrets_provider {
-    secret_rotation_enabled = true
+    secret_rotation_enabled  = true
     secret_rotation_interval = "2m"
   }
 
