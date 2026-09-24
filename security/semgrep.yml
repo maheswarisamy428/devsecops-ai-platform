@@ -1,0 +1,12 @@
+rules:
+  - id: docker-no-latest-tag
+    message: "Do not use the mutable :latest tag for container base images. Pin a stable version or digest."
+    severity: ERROR
+    languages: [dockerfile]
+    pattern: FROM $IMAGE:latest
+
+  - id: docker-unpinned-base-image
+    message: "Container base images must use an explicit version tag or digest."
+    severity: WARNING
+    languages: [dockerfile]
+    pattern: FROM $IMAGE
