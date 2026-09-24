@@ -1,0 +1,6 @@
+ci_pipeline_success_rate_percent 98
+pod_restart_count_15m 0
+security_policy_denials_per_second 3.4
+http_request_rate_per_second 21
+http_5xx_rate_percent 0.3
+pod_availability_ready 2
