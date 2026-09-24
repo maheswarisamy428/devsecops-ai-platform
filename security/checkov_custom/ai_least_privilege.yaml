@@ -1,0 +1,29 @@
+---
+metadata:
+  name: "AI workload RBAC uses an approved least-privilege role"
+  id: "CKV2_CUSTOM_1"
+  category: "IAM"
+  guideline: "AI workload identities must not receive broad control-plane roles."
+  severity: "HIGH"
+
+scope:
+  provider: azure
+
+definition:
+  and:
+    - cond_type: filter
+      attribute: resource_type
+      operator: within
+      value:
+        - azurerm_role_assignment
+    - cond_type: attribute
+      resource_types:
+        - azurerm_role_assignment
+      attribute: role_definition_name
+      operator: within
+      value:
+        - Storage Blob Data Reader
+        - Storage Blob Data Contributor
+        - Key Vault Secrets User
+        - AcrPull
+        - Key Vault Crypto Service Encryption User

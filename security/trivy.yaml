@@ -1,0 +1,7 @@
+# Trivy configuration for the simulated pipeline.
+# The CI workflow supplies CRITICAL,HIGH and exit-code=1 explicitly.
+severity:
+  - CRITICAL
+  - HIGH
+ignore-unfixed: true
+format: table
