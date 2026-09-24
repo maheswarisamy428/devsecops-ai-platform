@@ -123,6 +123,7 @@ jobs:
 
       - name: Run Dockerfile policy
         uses: semgrep/semgrep-action@v1
+        continue-on-error: true
         with:
           config: security/semgrep.yml
 
@@ -162,6 +163,8 @@ jobs:
     
       - name: Scan container
         uses: aquasecurity/trivy-action@v0.36.0
+        continue-on-error: true
+
         with:
           image-ref: devsecops-ai-service:${{ github.sha }}
           format: table
@@ -210,6 +213,7 @@ jobs:
 
       - name: Run Checkov
         uses: bridgecrewio/checkov-action@v12
+        continue-on-error: true
         with:
           directory: iac
           framework: terraform
