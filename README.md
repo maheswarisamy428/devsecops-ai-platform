@@ -292,16 +292,16 @@ The candidate remains responsible for understanding and being able to explain th
 
 Before submitting the repository:
 
-- [ ] Public GitHub repository created.
-- [ ] Incremental commit history retained.
-- [ ] All five workstreams represented.
-- [ ] `EVALS.md` reviewed and updated with actual observed evidence where available.
-- [ ] `ARCHITECTURE.md` reviewed and understood end-to-end.
-- [ ] `DECISIONS.md` clearly distinguishes runnable work from simulated/conceptual work.
-- [ ] `AI_USAGE.md` reflects the actual AI assistance used.
-- [ ] Screenshots added under the appropriate `docs/screenshots/workstream-*` directory.
-- [ ] No real credentials or paid-tool dependencies committed.
-- [ ] Negative evaluation fixtures are not deployed or applied.
+- ✅ Public GitHub repository created.
+- ✅ Incremental commit history retained.
+- ✅ All five workstreams represented.
+- ✅ `EVALS.md` reviewed and updated with actual observed evidence where available.
+- ✅ `ARCHITECTURE.md` reviewed and understood end-to-end.
+- ✅ `DECISIONS.md` clearly distinguishes runnable work from simulated/conceptual work.
+- ✅ `AI_USAGE.md` reflects the actual AI assistance used.
+- ✅ Screenshots added under the appropriate `docs/screenshots/workstream-*` directory.
+- ✅ No real credentials or paid-tool dependencies committed.
+- ✅ Negative evaluation fixtures are not deployed or applied.
 
 ## 12. Final scope statement
 
