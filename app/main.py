@@ -10,8 +10,6 @@ APP_CONFIG = {
     "title": "Bytespoke Assistant",
 }
 
-
-
 app = FastAPI(title=APP_CONFIG["title"], version="0.1.0")
 
 HTTP_REQUESTS = Counter(
