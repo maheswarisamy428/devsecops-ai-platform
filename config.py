@@ -1,1 +1,1 @@
-open_api_key="tqgqwufqfqgfabjwfqwqwfugq"
+api_secret="tqgqwufqfqgfabjwfqwqwfugq"
