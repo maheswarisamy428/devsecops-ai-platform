@@ -109,7 +109,7 @@ jobs:
         uses: gitleaks/gitleaks-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_CONFIG: ${{ github.workspace }}/security/gitleaks.toml
+          GITLEAKS_CONFIG: security/gitleaks.toml
 
   dockerfile_policy:
     name: Dockerfile Security Policy
