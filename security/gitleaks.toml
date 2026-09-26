@@ -1,12 +1,8 @@
-# Gitleaks configuration for detecting hardcoded secrets
-# Generic pattern-based detection to identify potential secrets
-# without relying on provider-specific variable names.
-
 title = "Generic Secret Detection Configuration"
 
-# Generic API keys, access tokens, secrets, passwords and private keys
 [[rules]]
-description = "Generic Hardcoded Secret"
+id = "generic-hardcoded-secret"
+description = "Generic hardcoded secret"
 regex = '''(?i)(api[_-]?key|access[_-]?key|secret[_-]?key|client[_-]?secret|access[_-]?token|auth[_-]?token|password|passwd|private[_-]?key|secret|token)\s*[:=]\s*["']?[A-Za-z0-9_./+=:@#$%^&*~?{}\[\]-]{12,}["']?'''
 keywords = [
     "api_key",
@@ -22,33 +18,33 @@ keywords = [
     "token"
 ]
 
-# Generic bearer tokens
 [[rules]]
-description = "Bearer Token"
+id = "generic-bearer-token"
+description = "Bearer token"
 regex = '''(?i)Bearer\s+[A-Za-z0-9._~+/=-]{20,}'''
 keywords = ["Bearer"]
 
-# Generic Basic authentication credentials
 [[rules]]
-description = "Basic Authentication Credential"
+id = "generic-basic-auth"
+description = "Basic authentication credential"
 regex = '''(?i)Basic\s+[A-Za-z0-9+/=]{20,}'''
 keywords = ["Basic"]
 
-# Generic JSON Web Tokens
 [[rules]]
+id = "json-web-token"
 description = "JSON Web Token"
 regex = '''eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}'''
 keywords = ["eyJ"]
 
-# Generic private key material
 [[rules]]
-description = "Private Key"
+id = "private-key"
+description = "Private key"
 regex = '''-----BEGIN (RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY-----'''
 keywords = ["PRIVATE KEY"]
 
-# Generic connection strings containing credentials
 [[rules]]
-description = "Connection String With Credentials"
+id = "connection-string-credentials"
+description = "Connection string containing credentials"
 regex = '''(?i)(Server|Host|Data Source|Endpoint|AccountName)\s*=\s*[^;\s]+.*(Password|Pwd|AccountKey|AccessKey|Secret)\s*=\s*[^;\s]+'''
 keywords = [
     "Server=",
@@ -61,10 +57,10 @@ keywords = [
     "Secret="
 ]
 
-# Generic high-entropy secret-like value assigned to a variable
 [[rules]]
-description = "Potential High Entropy Secret"
-regex = '''(?i)(key|secret|token|credential|password|passwd)\s*[:=]\s*["'][A-Za-z0-9+/=_\-]{20,}["']'''
+id = "generic-secret-value"
+description = "Potential high entropy secret"
+regex = '''(?i)(key|secret|token|credential|password|passwd)\s*[:=]\s*["'][A-Za-z0-9+/=_-]{20,}["']'''
 keywords = [
     "key",
     "secret",
