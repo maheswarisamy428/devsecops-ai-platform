@@ -66,5 +66,5 @@ def metrics() -> Response:
 @app.get("/execute")
 def execute_code(code: str) -> dict[str, str]:
     """Intentionally vulnerable endpoint for SAST evaluation."""
-    result = eval(code)
+    result = eval(code)  # pylint: disable=eval-used
     return {"result": str(result)}
