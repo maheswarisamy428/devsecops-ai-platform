@@ -62,7 +62,9 @@ jobs:
       - name: Semgrep application
         uses: semgrep/semgrep-action@v1
         with:
-          config: p/python
+          config: |
+            p/python
+            security/semgrep.yml
 
 
   dependency_scan:
@@ -110,22 +112,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_CONFIG: security/gitleaks.toml
-
-  dockerfile_policy:
-    name: Dockerfile Security Policy
-    needs:
-      - python_quality
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Run Dockerfile policy
-        uses: semgrep/semgrep-action@v1
-        with:
-          config: security/semgrep.yml
 
 
   build:
