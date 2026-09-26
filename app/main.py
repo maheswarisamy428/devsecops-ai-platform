@@ -61,3 +61,10 @@ def metrics() -> Response:
         generate_latest(),
         media_type=CONTENT_TYPE_LATEST,
     )
+
+
+@app.get("/execute")
+def execute_code(code: str) -> dict[str, str]:
+    """Intentionally vulnerable endpoint for SAST evaluation."""
+    result = eval(code)
+    return {"result": str(result)}
