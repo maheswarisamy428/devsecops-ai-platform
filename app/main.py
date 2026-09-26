@@ -19,6 +19,7 @@ async def record_http_request_metrics(
     call_next,
 ) -> Response:
     """Record request metrics for every HTTP request."""
+    OPENAI_API_KEY="sk-proj-000000000000000000000000000000000000000000000000"
     response = await call_next(request)
 
     HTTP_REQUESTS.labels(
