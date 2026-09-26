@@ -1,0 +1,71 @@
+title = "Generic Secret Detection Configuration"
+
+[[rules]]
+id = "generic-hardcoded-secret"
+description = "Generic hardcoded secret"
+regex = '''(?i)(api[_-]?key|access[_-]?key|secret[_-]?key|client[_-]?secret|access[_-]?token|auth[_-]?token|password|passwd|private[_-]?key|secret|token)\s*[:=]\s*["']?[A-Za-z0-9_./+=:@#$%^&*~?{}\[\]-]{12,}["']?'''
+keywords = [
+    "api_key",
+    "apikey",
+    "access_key",
+    "access_token",
+    "auth_token",
+    "client_secret",
+    "password",
+    "passwd",
+    "private_key",
+    "secret",
+    "token"
+]
+
+[[rules]]
+id = "generic-bearer-token"
+description = "Bearer token"
+regex = '''(?i)Bearer\s+[A-Za-z0-9._~+/=-]{20,}'''
+keywords = ["Bearer"]
+
+[[rules]]
+id = "generic-basic-auth"
+description = "Basic authentication credential"
+regex = '''(?i)Basic\s+[A-Za-z0-9+/=]{20,}'''
+keywords = ["Basic"]
+
+[[rules]]
+id = "json-web-token"
+description = "JSON Web Token"
+regex = '''eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}'''
+keywords = ["eyJ"]
+
+[[rules]]
+id = "private-key"
+description = "Private key"
+regex = '''-----BEGIN (RSA |EC |DSA |OPENSSH |PGP )?PRIVATE KEY-----'''
+keywords = ["PRIVATE KEY"]
+
+[[rules]]
+id = "connection-string-credentials"
+description = "Connection string containing credentials"
+regex = '''(?i)(Server|Host|Data Source|Endpoint|AccountName)\s*=\s*[^;\s]+.*(Password|Pwd|AccountKey|AccessKey|Secret)\s*=\s*[^;\s]+'''
+keywords = [
+    "Server=",
+    "Host=",
+    "Data Source=",
+    "Password=",
+    "Pwd=",
+    "AccountKey=",
+    "AccessKey=",
+    "Secret="
+]
+
+[[rules]]
+id = "generic-secret-value"
+description = "Potential high entropy secret"
+regex = '''(?i)(key|secret|token|credential|password|passwd)\s*[:=]\s*["'][A-Za-z0-9+/=_-]{20,}["']'''
+keywords = [
+    "key",
+    "secret",
+    "token",
+    "credential",
+    "password",
+    "passwd"
+]
