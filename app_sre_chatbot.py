@@ -291,7 +291,7 @@ def process_question(question: str) -> None:
             "role": "user",
             "content": question,
         }
-    )
+    )   
 
     # ------------------------------------------------------------------------
     # Run SRE agent
