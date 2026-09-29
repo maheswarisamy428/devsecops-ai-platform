@@ -253,7 +253,7 @@ jobs:
           EXIT_CODE=$?
 
           if [ "$EXIT_CODE" -eq 0 ]; then
-            echo "::error::Security test failed - root pod was allowed."
+            echo "::error::Security test failed - Theroot pod was allowed."
             exit 1
           fi
 
