@@ -11,7 +11,7 @@ resource "azurerm_storage_account" "ai_model_data_public" {
   min_tls_version                 = "TLS1_2"
 }
 
-resource "azurerm_storage_container" "embeddings_public" {
+resource "azurerm_storage_container" "embeddings_private" {
   name                  = "embeddings"
   storage_account_id    = azurerm_storage_account.ai_model_data_public.id
   container_access_type = "blob"
