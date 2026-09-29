@@ -1,6 +1,6 @@
 # INTENTIONALLY INSECURE EVALUATION FIXTURE — DO NOT DEPLOY.
-resource "azurerm_storage_account" "ai_model_data_public" {
-  name                     = "evalaimodelpublic123"
+resource "azurerm_storage_account" "ai_model_data_private" {
+  name                     = "evalaimodelprivate123"
   resource_group_name      = "eval-rg"
   location                 = "westeurope"
   account_tier             = "Standard"
@@ -11,8 +11,8 @@ resource "azurerm_storage_account" "ai_model_data_public" {
   min_tls_version                 = "TLS1_2"
 }
 
-resource "azurerm_storage_container" "embeddings_public" {
+resource "azurerm_storage_container" "embeddings_private" {
   name                  = "embeddings"
-  storage_account_id    = azurerm_storage_account.ai_model_data_public.id
+  storage_account_id    = azurerm_storage_account.ai_model_data_private.id
   container_access_type = "blob"
 }
